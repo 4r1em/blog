@@ -5,8 +5,6 @@ const auth = require('../../middelwares/auth');
 const accessAdmin = require('../../middelwares/access_admin');
 const valid = require('../../middelwares/valid_objectid');
 const ObjectId = require('mongoose').Types.ObjectId;
-
-
 // Создание картинки
 
 router.post('/image', [auth, accessAdmin], async (req, res) => {
@@ -19,7 +17,7 @@ router.post('/image', [auth, accessAdmin], async (req, res) => {
 
 // Вывод всех картинок
 
-router.get('/images', [auth, accessAdmin], async (req, res) => {
+router.get('/images', auth, async (req, res) => {
     const images = await imageModel.find();
     if (!images.length) return res.status(200).json("images");
 

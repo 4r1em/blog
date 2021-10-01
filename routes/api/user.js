@@ -5,7 +5,7 @@ const auth = require('../../middelwares/auth');
 const tokenGenerator = require('../../access/generateAccessToken');
 const bcrypt = require('bcrypt');
 const valid = require('../../middelwares/valid_objectid');
-
+const cookieParser = require('cookie-parser')
 
 
 // Создание юзера
@@ -46,6 +46,7 @@ router.post('/user/auth', async (req, res) => {
 
     const userId = user['_id'].toString();
     const token = tokenGenerator(userId);
+    res.cookie('token', token)
 
     await userModel.updateOne({ '_id': userId }, {
         'token': token

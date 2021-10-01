@@ -19,7 +19,7 @@ router.post('/category', [auth, accessAdmin], async (req, res) => {
 
 // Вывод всех категорий
 
-router.get('/categories', [auth, accessAdmin], async (req, res) => {
+router.get('/categories', auth, async (req, res) => {
     const categories = await categoryModel.find();
     if (!categories.length) return res.status(200).json(categories);
 

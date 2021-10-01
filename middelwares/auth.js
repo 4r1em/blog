@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models_mongoDB/users')
 const dotenv = require('dotenv')
+
 dotenv.config();
 
 const auth = async (req, res, next) => {
+
     try {
-        const token = req.header('authorization').trim();
+        const token = req.cookies.token.trim();
         if (!token) throw new Error();
 
         const userId = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -20,7 +22,7 @@ const auth = async (req, res, next) => {
         req.user = user;
         next();
     } catch (err) {
-        res.status(401).send({ error: 'Need auth!' });
+        res.status(401).json({ error: 'Need auth!' });
     }
 }
 

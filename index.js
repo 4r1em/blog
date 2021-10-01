@@ -17,9 +17,11 @@ const imageWebRoutes = require('./routes/web/image');
 const homeWebRoutes = require('./routes/web/home');
 const categoryWebRoutes = require('./routes/web/category');
 const registerWebRoutes = require('./routes/web/register');
+const cookieParser = require('cookie-parser')
 
 dotenv.config();
 
+app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname)));
 app.set('view engine', 'hbs');

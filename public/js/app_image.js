@@ -1,4 +1,3 @@
-const authorization = 'eyJhbGciOiJIUzI1NiJ9.NjE0YjJlMjA5MzJjYmQ1NmM5NjFmNTM3.QKNTSH_80w_nNT_UBtk9AaNFIG6ca0FgkKqLXSQk27A';
 
 // Создание картинки
 
@@ -121,7 +120,6 @@ async function fetchParams(url, method, params = {}) {
     const response = await fetch(url, {
         method: method,
         headers: {
-            authorization,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(params)
@@ -133,7 +131,6 @@ async function fetchGet(url, params = '') {
     const response = await fetch(url + params, {
         method: 'GET',
         headers: {
-            authorization,
             'Content-Type': 'application/json'
         },
     })
