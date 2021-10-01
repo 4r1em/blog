@@ -14,6 +14,7 @@ const imageApiRoutes = require('./routes/api/image');
 
 const articleWebRoutes = require('./routes/web/article');
 const imageWebRoutes = require('./routes/web/image');
+const homeWebRoutes = require('./routes/web/home');
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use(express.json());
 /**
  * Web routes
  */
+app.use(homeWebRoutes);
 app.use(imageWebRoutes);
 app.use(articleWebRoutes);
 

@@ -16,7 +16,7 @@ $createImageForm.addEventListener('submit', async function (e) {
             const imageDiv = document.querySelector("#createimage");
             const image = data;
             const tag = document.createElement('p');
-            tag.innerHTML = `url: ${image.url}<hr>`;
+            tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
             imageDiv.append(tag);
         });
 });
@@ -38,7 +38,7 @@ $allImagesForm.addEventListener('submit', async function (e) {
                 const imageDiv = document.querySelector("#allimages");
                 const image = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `url: ${image.url}<hr>`;
+                tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
                 imageDiv.append(tag);
             };
         });
@@ -62,7 +62,7 @@ $imageForm.addEventListener('submit', async function (e) {
                 const imageDiv = document.querySelector("#getimage");
                 const image = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `url: ${image.url}<hr>`;
+                tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
                 imageDiv.append(tag);
             }
         });
@@ -88,7 +88,7 @@ $imagePutForm.addEventListener('submit', async function (e) {
             const imageDiv = document.querySelector("#putimage");
             const image = data[0];
             const tag = document.createElement('p');
-            tag.innerHTML = `url: ${image.url}<hr>`;
+            tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
             imageDiv.append(tag);
 
         });
