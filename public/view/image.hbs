@@ -1,0 +1,45 @@
+{{!-- Создание картинки --}}
+<form id="create-image">
+    <p> URL <input type="text" name="url"></p>
+    <button type="submit" style="background-color:darkolivegreen">Create image</button>
+</form>
+<div id="createimage" style="background-color:darkolivegreen"></div>
+
+<hr>
+{{!-- Вывод всех картинок --}}
+<form id="get-images">
+    <button type="submit" style="background-color:darkgoldenrod">Get all images</button>
+</form>
+<div id="allimages" style="background-color:darkgoldenrod"></div>
+
+<hr>
+{{!-- Вывод одной картинки --}}
+<form id="get-image">
+    <p> Image ID <input type="text" name="image_id"></p>
+    <button type="submit" style="background-color:deepskyblue">Get one image</button>
+</form>
+<div id="getimage" style="background-color:deepskyblue"></div>
+
+<hr>
+{{!-- Обновлние картинки --}}
+<form id="put-image">
+    <p> Image ID <input type="text" name="image_id"></p>
+    <p> URL update <input type="text" name="url"></p>
+    <button type="submit" style="background-color:sienna">Update image</button>
+</form>
+<div id="putimage" style="background-color:sienna"></div>
+
+<hr>
+{{!-- Удаление картинки--}}
+<form id="del-image">
+    <p> Image delete ID <input type="text" name="image_id"></p>
+    <button type="submit" style="background-color:red">Update image</button>
+</form>
+<div id="delimage" style="background-color:red"></div>
+
+<hr>
+
+
+
+
+<script src="../js/app_image.js"></script>

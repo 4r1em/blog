@@ -13,6 +13,7 @@ const categoryApiRoutes = require('./routes/api/category');
 const imageApiRoutes = require('./routes/api/image');
 
 const articleWebRoutes = require('./routes/web/article');
+const imageWebRoutes = require('./routes/web/image');
 
 dotenv.config();
 
@@ -22,12 +23,12 @@ app.set('view engine', 'hbs');
 /**
  * Регистрация папки где лежат шаблоны
  */
-app.set('views', path.join(__dirname, './public/view') );
+app.set('views', path.join(__dirname, './public/view'));
 /**
  * Регистрация папки, где будут лежать все публичные данные
  * Это для js скриптов на фронте, для шаблонов, картинок и css файлов
  */
-app.use( express.static( path.join(__dirname, './public') ) );
+app.use(express.static(path.resolve(__dirname, './public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -35,8 +36,10 @@ app.use(express.json());
 /**
  * Web routes
  */
- app.use(articleWebRoutes);
- 
+app.use(imageWebRoutes);
+app.use(articleWebRoutes);
+
+
 /**
  * API routes
  * Чтобы все апи роуты использовали по умолчанию префикс /api/v1
