@@ -1,4 +1,4 @@
-const authorization = 'eyJhbGciOiJIUzI1NiJ9.NjE0YjJkOGI5MzJjYmQ1NmM5NjFmNTI4.jHAXsdKM9C46kYz1hzfgOCrOwJck2Z4GIhm9oNVo3uY';
+const authorization = 'eyJhbGciOiJIUzI1NiJ9.NjE0YjJlMjA5MzJjYmQ1NmM5NjFmNTM3.QKNTSH_80w_nNT_UBtk9AaNFIG6ca0FgkKqLXSQk27A';
 
 // Создание записи
 

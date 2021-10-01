@@ -21,9 +21,7 @@ $createImageForm.addEventListener('submit', async function (e) {
         });
 });
 
-
 // Вывод всех картинок
-
 
 const $allImagesForm = document.querySelector("#get-images");
 

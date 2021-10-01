@@ -30,8 +30,6 @@ router.get('/images', [auth, accessAdmin], async (req, res) => {
 // Вывод одной картинки
 
 router.get('/image/:id', [auth, accessAdmin], async (req, res) => {
-
-
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).json("Not correct ID");
     }
