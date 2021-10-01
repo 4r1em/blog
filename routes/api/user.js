@@ -11,14 +11,14 @@ const valid = require('../../middelwares/valid_objectid');
 // Создание юзера
 
 router.post('/user', async (req, res) => {
-    if (!Object.keys(req.body).length) {
-        return res.status(400).send("To register, enter your email and password");
-    };
+
     const role = (req.body.role) ? req.body.role : "user";
     if (!req.body.name || !req.body.email || !req.body.password) {
-        return res.status(400).send("To register, enter your email and password");
+        return res.status(400).json("To register, enter your email and password");
     };
-    if (req.body.password.length < 8) return res.status(400).send("Password length must be greater than 8");
+    const userEmail = await userModel.findOne({ 'email': req.body.email });
+    if (userEmail) return res.status(400).json("User with this email already exists");
+    if (req.body.password.length < 8) return res.status(400).json("Password length must be greater than 8");
 
     const user = await userModel.create({ ...req.body, "role": role });
 
@@ -29,8 +29,9 @@ router.post('/user', async (req, res) => {
 // Вход юзера и создание токена
 
 router.post('/user/auth', async (req, res) => {
-    if (!Object.keys(req.body).length || !req.body.email || !req.body.password) {
-        return res.status(400).send("To enter you need a password and email");
+
+    if (!req.body.email || !req.body.password) {
+        return res.status(400).json("To enter you need a password and email");
     }
     const email = req.body.email;
     const password = req.body.password;
@@ -38,7 +39,7 @@ router.post('/user/auth', async (req, res) => {
     if (!email || !password) return resError(res);
 
     const user = await userModel.findOne({ 'email': email });
-    if (!user) return resError(res);
+    if (!user) return res.status(400).json("User with this email still exists");
 
     const isCorrectPassword = await bcrypt.compare(password, user.password);
     if (!isCorrectPassword) return resError(res);
@@ -51,7 +52,7 @@ router.post('/user/auth', async (req, res) => {
     });
 
     res.status(200);
-    res.send({
+    res.json({
         "id": userId,
         "token": token
     });
@@ -163,7 +164,7 @@ router.put('/user/submit', [auth, valid], async (req, res) => {
 
 function resError(res) {
     res.status(401);
-    res.send('Incorrect username or password');
+    res.json('Incorrect username or password');
 }
 
 module.exports = router

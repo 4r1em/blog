@@ -16,6 +16,7 @@ const articleWebRoutes = require('./routes/web/article');
 const imageWebRoutes = require('./routes/web/image');
 const homeWebRoutes = require('./routes/web/home');
 const categoryWebRoutes = require('./routes/web/category');
+const registerWebRoutes = require('./routes/web/register');
 
 dotenv.config();
 
@@ -42,7 +43,7 @@ app.use(homeWebRoutes);
 app.use(imageWebRoutes);
 app.use(articleWebRoutes);
 app.use(categoryWebRoutes);
-
+app.use(registerWebRoutes);
 /**
  * API routes
  * Чтобы все апи роуты использовали по умолчанию префикс /api/v1
