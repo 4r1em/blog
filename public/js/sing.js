@@ -31,9 +31,8 @@ $singUsersForm.addEventListener('submit', async function (e) {
         })
         .then((data) => {
             const div = document.querySelector("#singuser");
-            const user = data;
             const tag = document.createElement('p');
-            tag.innerHTML = `User ID: ${user.id} <br> Token: ${user.token}`;
+            tag.innerHTML = `You are logged in`;
             div.append(tag);
         });
 });

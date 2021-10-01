@@ -12,6 +12,7 @@ $createArticlesForm.addEventListener('submit', async function (e) {
         category_id: this.elements['category_id'].value,
         image_id: this.elements['image_id'].value
     };
+    
     fetchParams('/api/v1/article', 'POST', form)
         .then(response => {
             return sendError(response, "#createarticles")
