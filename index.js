@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 const dotenv = require('dotenv');
 const path = require('path');
 const hbs = require('hbs');
+const cookieParser = require('cookie-parser')
 
 const userApiRoutes = require('./routes/api/user');
 const articleApiRoutes = require('./routes/api/article');
@@ -17,7 +18,8 @@ const imageWebRoutes = require('./routes/web/image');
 const homeWebRoutes = require('./routes/web/home');
 const categoryWebRoutes = require('./routes/web/category');
 const registerWebRoutes = require('./routes/web/register');
-const cookieParser = require('cookie-parser')
+const userWebRoutes = require('./routes/web/user');
+
 
 dotenv.config();
 
@@ -41,6 +43,7 @@ app.use(express.json());
 /**
  * Web routes
  */
+app.use(userWebRoutes);
 app.use(homeWebRoutes);
 app.use(imageWebRoutes);
 app.use(articleWebRoutes);

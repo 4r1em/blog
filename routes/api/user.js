@@ -5,7 +5,8 @@ const auth = require('../../middelwares/auth');
 const tokenGenerator = require('../../access/generateAccessToken');
 const bcrypt = require('bcrypt');
 const valid = require('../../middelwares/valid_objectid');
-const cookieParser = require('cookie-parser')
+const ObjectId = require('mongoose').Types.ObjectId;
+
 
 
 // Создание юзера
@@ -70,14 +71,14 @@ router.get('/users', auth, async (req, res) => {
 
 // Вывод одного юзера по ID
 
-router.get('/user', [auth, valid], async (req, res) => {
-    if (!Object.keys(req.body).length || !req.body.id) {
-        return res.status(400).send("Enter ID user");
-    };
+router.get('/user/:id', auth, async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        return res.status(400).json("Not correct ID");
+    }
     const user = await userModel.publicInfo({
-        '_id': req.body.id
+        '_id': req.params.id
     });
-    if (!user.length) return res.status(404).send("User not found!");
+    if (!user.length) return res.status(404).json("User not found!");
 
     res.status(200);
     res.json(user);
@@ -85,28 +86,29 @@ router.get('/user', [auth, valid], async (req, res) => {
 
 // Измененине юзера
 
-router.put('/user', [auth, valid], async (req, res) => {
-    if (!Object.keys(req.body).length) {
-        if (req.user.role === "admin") {
-            return res.status(400).send("Enter your user ID and what you want to change");
-        }
-        else if (req.user.role === "user") {
-            return res.status(400).send("Enter what you want to change");
-        };
-    };
+router.put('/user', auth, async (req, res) => {
     const userId = (!req.body.id) ? req.user['_id'] : req.body.id;
-    if (req.body['_id']) {
-        return res.status(400).send("Id can not be changed");
+    if (!ObjectId.isValid(userId)) {
+        return res.status(400).json("Not correct ID");
+    }
+    if (!req.body.name.length && !req.body.password.length && !req.body.email.length && !req.body.role.length) {
+        return res.status(400).json("Enter what you want to update")
     };
+    if (!req.body.name.length) delete req.body.name
+    if (!req.body.password.length) delete req.body.password
+    if (!req.body.email.length) delete req.body.email
+    if (!req.body.role.length) delete req.body.role
+    if (!req.body.id.length) delete req.body.id
+
     if (req.body.role && req.user.role !== "admin") {
-        return res.status(400).send("The role cannot be changed only by the admin");
+        return res.status(400).json("The role cannot be changed only by the admin");
     };
     if (req.body.id && req.user.role !== "admin") {
-        return res.status(400).send("You have no rights to replace someone else's data");
+        return res.status(400).json("You have no rights to replace someone else's data");
     };
 
     const user = await userModel.find({ '_id': userId })
-    if (!user.length) return res.status(404).send("User not found!");
+    if (!user.length) return res.status(404).json("User not found!");
 
     await userModel.updateOne({ "_id": userId }, req.body);
     const updateUser = await userModel.publicInfo({ '_id': userId })
@@ -117,40 +119,40 @@ router.put('/user', [auth, valid], async (req, res) => {
 
 // Удаление юзера
 
-router.delete('/user', [auth, valid], async (req, res) => {
-    if (!Object.keys(req.body).length && req.user.role === "admin") {
-        res.status(400).send("Enter the ID of the person to delete");
+router.delete('/user', auth, async (req, res) => {
+    const userId = (!req.body.id) ? req.user['_id'] : req.body.id;
+    if (!ObjectId.isValid(userId)) {
+        return res.status(400).json("Not correct ID");
     }
+    if (!req.body.id.length) delete req.body.id
+
     if (req.body.id && req.user.role !== "admin") {
-        return res.status(400).send("You do not have permission to delete other users");
+        return res.status(400).json("You have no rights to replace someone else's data");
     };
 
-    const userId = (!req.body.id) ? req.user['_id'] : req.body.id;
     const user = await userModel.find({ '_id': userId })
-    if (!user.length) return res.status(404).send("User not found!");
+    if (!user.length) return res.status(404).json("User not found!");
 
     await userModel.deleteOne({ "_id": userId })
 
     res.status(200);
-    res.send('User deleted');
+    res.json('User deleted');
 
 });
 
 // Подписка на другого юзера
 
 router.put('/user/submit', [auth, valid], async (req, res) => {
-    if (!Object.keys(req.body).length || !req.body.id) {
-        return res.status(400).send("Enter ID user");
-    };
     const userId = req.user['_id'];
     const subId = req.body.id
-    if (subId == userId) return res.status(400).send("You can't subscribe to yourself")
+
+    if (subId == userId) return res.status(400).json("You can't subscribe to yourself")
 
     const subUserDb = await userModel.find({ '_id': subId });
-    if (!subUserDb.length) return res.status(400).send("No such user exists");
+    if (!subUserDb.length) return res.status(400).json("No such user exists");
 
     for (let key of req.user.follower) {
-        if (key == subId) return res.status(400).send("you are already subscribed");
+        if (key == subId) return res.status(400).json("you are already subscribed");
     };
     await userModel.updateOne({ '_id': userId }, { $push: { 'follower': subId } });
 
