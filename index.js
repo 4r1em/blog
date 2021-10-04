@@ -27,33 +27,22 @@ app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname)));
 app.set('view engine', 'hbs');
-/**
- * Регистрация папки где лежат шаблоны
- */
+
 app.set('views', path.join(__dirname, './public/view'));
-/**
- * Регистрация папки, где будут лежать все публичные данные
- * Это для js скриптов на фронте, для шаблонов, картинок и css файлов
- */
+
 app.use(express.static(path.resolve(__dirname, './public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
-/**
- * Web routes
- */
+
 app.use(userWebRoutes);
 app.use(homeWebRoutes);
 app.use(imageWebRoutes);
 app.use(articleWebRoutes);
 app.use(categoryWebRoutes);
 app.use(registerWebRoutes);
-/**
- * API routes
- * Чтобы все апи роуты использовали по умолчанию префикс /api/v1
- * Например: localhost:3009/api/v1/article
- */
+
 app.use('/api/v1', userApiRoutes);
 app.use('/api/v1', imageApiRoutes);
 app.use('/api/v1', categoryApiRoutes);

@@ -1,11 +1,15 @@
 <a href="http://localhost:3017/home"> Home </a>
 
+{{!-- Вывод всех юзеров --}}
+
 <form id="get-users">
     <button type="submit" style="background-color:darkgoldenrod">Get all users</button>
 </form>
 <div id="getusers" style="background-color:darkgoldenrod"></div>
 
 <hr>
+
+{{!-- Вывод одного юзера по ID --}}
 
 <form id="get-user">
     <p> User ID <input type="text" name="user_id"></p>
@@ -14,6 +18,8 @@
 <div id="getuser" style="background-color:deepskyblue"></div>
 
 <hr>
+
+{{!-- Измененине юзера --}}
 
 <form id="put-user">
     <p> User ID (If you are an admin) <input type="text" name="id"></p>
@@ -27,14 +33,17 @@
 
 <hr>
 
+{{!-- Удаление юзера --}}
+
 <form id="delete-user">
-    <p> Delete ID <input type="text" name="id"></p>
+    <p> Delete ID (If you are not an admin you will delete your profile) <input type="text" name="id"></p>
     <button type="submit" style="background-color:red">Delete user</button>
 </form>
 <div id="deleteuser" style="background-color:red"></div>
 
 <hr>
 
+{{!-- Подписка на другого юзера --}}
 
 <form id="follower-user">
     <p> Submit user ID <input type="text" name="id"></p>

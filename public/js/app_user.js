@@ -116,7 +116,6 @@ $submitUserForm.addEventListener('submit', async function (e) {
         })
 });
 
-
 async function fetchParams(url, method, params = {}) {
     const response = await fetch(url, {
         method: method,
