@@ -16,8 +16,11 @@ $createImageForm.addEventListener('submit', async function (e) {
             const imageDiv = document.querySelector("#createimage");
             const image = data;
             const tag = document.createElement('p');
-            tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
-            imageDiv.append(tag);
+            const img = document.createElement("img");
+            img.src = image.url;
+            tag.innerHTML = `id:${image['_id']}`;
+            imageDiv.append(tag)
+            imageDiv.append(img)
         });
 });
 
@@ -27,7 +30,7 @@ const $allImagesForm = document.querySelector("#get-images");
 
 $allImagesForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet(urlV +'/images')
+    fetchGet(urlV + '/images')
         .then(response => {
             return sendError(response, "#allimages")
         })
@@ -36,8 +39,11 @@ $allImagesForm.addEventListener('submit', async function (e) {
                 const imageDiv = document.querySelector("#allimages");
                 const image = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
-                imageDiv.append(tag);
+                const img = document.createElement("img");
+                img.src = image.url;
+                tag.innerHTML = `id:${image['_id']}`;
+                imageDiv.append(tag)
+                imageDiv.append(img)
             };
         });
 });
@@ -51,7 +57,7 @@ const $imageForm = document.querySelector("#get-image");
 $imageForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const imageId = (this.elements['image_id'].value) ? this.elements['image_id'].value : "0"
-    fetchGet(urlV +'/image/', imageId)
+    fetchGet(urlV + '/image/', imageId)
         .then(response => {
             return sendError(response, "#getimage")
         })
@@ -60,8 +66,11 @@ $imageForm.addEventListener('submit', async function (e) {
                 const imageDiv = document.querySelector("#getimage");
                 const image = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
-                imageDiv.append(tag);
+                const img = document.createElement("img");
+                img.src = image.url;
+                tag.innerHTML = `id:${image['_id']}`;
+                imageDiv.append(tag)
+                imageDiv.append(img)
             }
         });
 });
@@ -77,7 +86,7 @@ $imagePutForm.addEventListener('submit', async function (e) {
         id: this.elements['image_id'].value,
         url: this.elements.url.value,
     };
-    fetchParams(urlV +'/image/', 'PUT', form)
+    fetchParams(urlV + '/image/', 'PUT', form)
 
         .then(response => {
             return sendError(response, "#putimage")
@@ -86,8 +95,11 @@ $imagePutForm.addEventListener('submit', async function (e) {
             const imageDiv = document.querySelector("#putimage");
             const image = data[0];
             const tag = document.createElement('p');
-            tag.innerHTML = `url: ${image.url} <br> id:${image['_id']} <hr>`;
-            imageDiv.append(tag);
+            const img = document.createElement("img");
+            img.src = image.url;
+            tag.innerHTML = `id:${image['_id']}`;
+            imageDiv.append(tag)
+            imageDiv.append(img)
 
         });
 });
@@ -103,7 +115,7 @@ $imageDelForm.addEventListener('submit', async function (e) {
         id: this.elements['image_id'].value,
     };
 
-    fetchParams(urlV +'/image/', 'DELETE', form)
+    fetchParams(urlV + '/image/', 'DELETE', form)
         .then(response => {
             return sendError(response, "#delimage")
         })
