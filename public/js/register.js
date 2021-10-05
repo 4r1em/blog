@@ -1,3 +1,6 @@
+const urlV = '/api/v1'
+
+
 // Создание юзера
 
 const $createUsersForm = document.querySelector("#create-user");
@@ -11,7 +14,7 @@ $createUsersForm.addEventListener('submit', async function (e) {
         password: this.elements.password.value
     };
 
-    await fetch('/api/v1/user', {
+    await fetch(urlV + '/user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

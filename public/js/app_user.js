@@ -1,10 +1,13 @@
-const $allUsersForm = document.querySelector("#get-users");
+const urlV = '/api/v1'
 
 // Вывод всех юзеров
 
+const $allUsersForm = document.querySelector("#get-users");
+
+
 $allUsersForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet('/api/v1/users')
+    fetchGet(urlV + '/users')
         .then(response => {
             return sendError(response, "#getusers")
         })
@@ -26,7 +29,7 @@ const $userForm = document.querySelector("#get-user");
 $userForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const userId = (this.elements['user_id'].value) ? this.elements['user_id'].value : "0"
-    fetchGet('/api/v1/user/', userId)
+    fetchGet(urlV + '/user/', userId)
         .then(response => {
             return sendError(response, "#getuser")
         })
@@ -56,7 +59,7 @@ $updateUserForm.addEventListener('submit', async function (e) {
     };
 
 
-    fetchParams('/api/v1/user', 'PUT', form)
+    fetchParams(urlV + '/user', 'PUT', form)
         .then(response => {
             return sendError(response, "#putuser")
         })
@@ -79,7 +82,7 @@ $deleteUserForm.addEventListener('submit', async function (e) {
         id: this.elements.id.value
     };
 
-    fetchParams('/api/v1/user', 'DELETE', form)
+    fetchParams(urlV + '/user', 'DELETE', form)
         .then(response => {
             return sendError(response, "#deleteuser")
         })
@@ -101,7 +104,7 @@ $submitUserForm.addEventListener('submit', async function (e) {
     const form = {
         id: this.elements.id.value
     };
-    fetchParams('/api/v1/user/submit', 'PUT', form)
+    fetchParams(urlV + '/user/submit', 'PUT', form)
         .then(response => {
             return sendError(response, "#followeruser")
         })

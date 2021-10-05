@@ -1,3 +1,6 @@
+const urlV = '/api/v1'
+
+
 // Вход юзера
 
 const $singUsersForm = document.querySelector("#sing-user");
@@ -10,7 +13,7 @@ $singUsersForm.addEventListener('submit', async function (e) {
         password: this.elements.password.value
     };
 
-    await fetch('/api/v1/user/auth', {
+    await fetch(urlV + '/user/auth', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

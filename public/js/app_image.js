@@ -1,3 +1,4 @@
+const urlV = '/api/v1'
 
 // Создание картинки
 
@@ -7,7 +8,7 @@ $createImageForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const form = { url: this.elements.url.value };
 
-    fetchParams('/api/v1/image/', 'POST', form)
+    fetchParams(urlV + '/image/', 'POST', form)
         .then(response => {
             return sendError(response, "#createimage")
         })
@@ -26,7 +27,7 @@ const $allImagesForm = document.querySelector("#get-images");
 
 $allImagesForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet('/api/v1/images')
+    fetchGet(urlV +'/images')
         .then(response => {
             return sendError(response, "#allimages")
         })
@@ -50,7 +51,7 @@ const $imageForm = document.querySelector("#get-image");
 $imageForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const imageId = (this.elements['image_id'].value) ? this.elements['image_id'].value : "0"
-    fetchGet('/api/v1/image/', imageId)
+    fetchGet(urlV +'/image/', imageId)
         .then(response => {
             return sendError(response, "#getimage")
         })
@@ -76,7 +77,7 @@ $imagePutForm.addEventListener('submit', async function (e) {
         id: this.elements['image_id'].value,
         url: this.elements.url.value,
     };
-    fetchParams('/api/v1/image/', 'PUT', form)
+    fetchParams(urlV +'/image/', 'PUT', form)
 
         .then(response => {
             return sendError(response, "#putimage")
@@ -102,7 +103,7 @@ $imageDelForm.addEventListener('submit', async function (e) {
         id: this.elements['image_id'].value,
     };
 
-    fetchParams('/api/v1/image/', 'DELETE', form)
+    fetchParams(urlV +'/image/', 'DELETE', form)
         .then(response => {
             return sendError(response, "#delimage")
         })

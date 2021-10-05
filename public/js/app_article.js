@@ -1,4 +1,4 @@
-
+const urlV = '/api/v1'
 
 // Создание записи
 
@@ -12,8 +12,8 @@ $createArticlesForm.addEventListener('submit', async function (e) {
         category_id: this.elements['category_id'].value,
         image_id: this.elements['image_id'].value
     };
-    
-    fetchParams('/api/v1/article', 'POST', form)
+
+    fetchParams(urlV + '/article', 'POST', form)
         .then(response => {
             return sendError(response, "#createarticles")
         })
@@ -32,7 +32,7 @@ const $allArticlesForm = document.querySelector("#get-articles");
 
 $allArticlesForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet('/api/v1/articles')
+    fetchGet(urlV + '/articles')
         .then(response => {
             return sendError(response, "#allarticles")
         })
@@ -53,7 +53,7 @@ const $articlesForm = document.querySelector("#get-article");
 
 $articlesForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet('/api/v1/articles')
+    fetchGet(urlV + '/articles')
         .then(response => {
             return sendError(response, "#articles")
         })
@@ -77,7 +77,7 @@ $articlesCategoryForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const categoryId = (this.elements['category_id'].value) ? this.elements['category_id'].value : "0"
 
-    fetchGet('/api/v1/article/category/', categoryId)
+    fetchGet(urlV + '/article/category/', categoryId)
 
         .then(response => {
             return sendError(response, "#articlesforcategory")
@@ -100,7 +100,7 @@ const $articlesFollowerForm = document.querySelector("#get-articlefollower");
 
 $articlesFollowerForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet('/api/v1/article/submit')
+    fetchGet(urlV + '/article/submit')
         .then(response => {
             return sendError(response, "#articlefollower")
         })
@@ -129,7 +129,7 @@ $updateArticlesForm.addEventListener('submit', async function (e) {
         image_id: this.elements['image_id'].value
     };
 
-    fetchParams('/api/v1/article', 'PUT', form)
+    fetchParams(urlV + '/article', 'PUT', form)
         .then(response => {
             return sendError(response, "#updatearticles")
         })
@@ -152,7 +152,7 @@ $deleteArticlesForm.addEventListener('submit', async function (e) {
         id: this.elements.id.value
     };
 
-    fetchParams('/api/v1/article', 'DELETE', form)
+    fetchParams(urlV + '/article', 'DELETE', form)
         .then(response => {
             return sendError(response, "#deletearticles")
         })

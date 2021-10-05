@@ -1,4 +1,4 @@
-
+const urlV = '/api/v1'
 
 // Создание категории
 
@@ -8,7 +8,7 @@ $createCategoryForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const form = { name: this.elements.name.value };
 
-    fetchParams('/api/v1/category/', 'POST', form)
+    fetchParams(urlV + '/category/', 'POST', form)
         .then(response => {
             return sendError(response, "#createcategory")
         })
@@ -27,7 +27,7 @@ const $allCategoriesForm = document.querySelector("#get-categories");
 
 $allCategoriesForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet('/api/v1/categories')
+    fetchGet(urlV + '/categories')
         .then(response => {
             return sendError(response, "#allcategories")
         })
@@ -51,7 +51,7 @@ $categoryForm.addEventListener('submit', async function (e) {
 
     const categoryId = (this.elements['category_id'].value) ? this.elements['category_id'].value : "0"
     console.log(categoryId)
-    fetchGet('/api/v1/category/', categoryId)
+    fetchGet(urlV + '/category/', categoryId)
         .then(response => {
             return sendError(response, "#getcategory")
         })
@@ -78,7 +78,7 @@ $categoryPutForm.addEventListener('submit', async function (e) {
         name: this.elements.name.value,
     };
     console.log(form)
-    fetchParams('/api/v1/category/', 'PUT', form)
+    fetchParams(urlV + '/category/', 'PUT', form)
 
         .then(response => {
             return sendError(response, "#putcategory")
@@ -104,7 +104,7 @@ $categoryDelForm.addEventListener('submit', async function (e) {
         id: this.elements['category_id'].value,
     };
 
-    fetchParams('/api/v1/category/', 'DELETE', form)
+    fetchParams(urlV + '/category/', 'DELETE', form)
         .then(response => {
             return sendError(response, "#delcategory")
         })
