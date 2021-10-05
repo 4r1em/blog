@@ -14,7 +14,7 @@ const articlesSchema = new mongoose.Schema({
     category_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Categorys'
+        ref: 'Categories'
     },
     url_img: {
         type: String,

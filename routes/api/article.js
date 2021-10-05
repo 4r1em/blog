@@ -3,7 +3,7 @@ const router = new express.Router();
 const articleModel = require('../../models_mongoDB/articles');
 const auth = require('../../middelwares/auth');
 const imageModel = require('../../models_mongoDB/images');
-const categoryModel = require('../../models_mongoDB/categorys');
+const categoryModel = require('../../models_mongoDB/categories');
 const valid = require('../../middelwares/valid_objectid');
 const ObjectId = require('mongoose').Types.ObjectId;
 

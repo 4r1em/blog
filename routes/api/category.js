@@ -1,6 +1,6 @@
 const express = require('express');
 const router = new express.Router();
-const categoryModel = require('../../models_mongoDB/categorys');
+const categoryModel = require('../../models_mongoDB/categories');
 const auth = require('../../middelwares/auth');
 const accessAdmin = require('../../middelwares/access_admin');
 const valid = require('../../middelwares/valid_objectid');

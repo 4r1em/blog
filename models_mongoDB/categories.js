@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const categorysSchema = new mongoose.Schema({
+const categoriesSchema = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     name: {
         type: String,
@@ -17,10 +17,10 @@ const categorysSchema = new mongoose.Schema({
     timestamps: true
 });
 
-categorysSchema.virtual('articles', {
+categoriesSchema.virtual('articles', {
     ref: 'Articles',
     localField: '_id',
     foreignField: 'category_id'
 });
 
-module.exports = mongoose.model("Categorys", categorysSchema);
+module.exports = mongoose.model("categories", categoriesSchema);
