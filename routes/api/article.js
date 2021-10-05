@@ -60,7 +60,6 @@ router.get('/article', auth, async (req, res) => {
     }
     const articles = await articleModel.find({ "author_id": req.user['_id'] }).sort(sort);
     if (!articles.length) return res.status(404).json("Article not found!");
-
     res.status(200)
     res.json(articles)
 

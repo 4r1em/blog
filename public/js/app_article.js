@@ -61,7 +61,7 @@ const $articlesForm = document.querySelector("#get-article");
 
 $articlesForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    fetchGet(urlV + '/articles')
+    fetchGet(urlV + '/article')
         .then(response => {
             return sendError(response, "#articles")
         })
