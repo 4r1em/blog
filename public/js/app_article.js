@@ -21,8 +21,12 @@ $createArticlesForm.addEventListener('submit', async function (e) {
             const articlesDiv = document.querySelector("#createarticles");
             const article = data;
             const tag = document.createElement('p');
-            tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <hr>`;
+            const img = document.createElement("img");
+            img.src = article.url_img;
+            tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <br>
+                category: ${article.name_category} <hr>`;
             articlesDiv.append(tag);
+            articlesDiv.append(img);
         });
 });
 
@@ -41,8 +45,12 @@ $allArticlesForm.addEventListener('submit', async function (e) {
                 const articlesDiv = document.querySelector("#allarticles");
                 const article = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <hr>`;
+                const img = document.createElement("img");
+                img.src = article.url_img;
+                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <br>
+                category: ${article.name_category} <hr>`;
                 articlesDiv.append(tag);
+                articlesDiv.append(img);
             };
         })
 });
@@ -62,8 +70,12 @@ $articlesForm.addEventListener('submit', async function (e) {
                 const articlesDiv = document.querySelector("#articles");
                 const article = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <hr>`;
+                const img = document.createElement("img");
+                img.src = article.url_img;
+                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <br>
+                category: ${article.name_category} <hr>`;
                 articlesDiv.append(tag);
+                articlesDiv.append(img);
             };
         })
 });
@@ -87,8 +99,12 @@ $articlesCategoryForm.addEventListener('submit', async function (e) {
                 const articlesDiv = document.querySelector("#articlesforcategory");
                 const article = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <hr>`;
+                const img = document.createElement("img");
+                img.src = article.url_img;
+                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <br>
+                category: ${article.name_category} <hr>`;
                 articlesDiv.append(tag);
+                articlesDiv.append(img);
             }
         })
 });
@@ -109,8 +125,12 @@ $articlesFollowerForm.addEventListener('submit', async function (e) {
                 const articlesDiv = document.querySelector("#articlefollower");
                 const article = data[item];
                 const tag = document.createElement('p');
-                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <hr>`;
+                const img = document.createElement("img");
+                img.src = article.url_img;
+                tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <br>
+                category: ${article.name_category} <hr>`;
                 articlesDiv.append(tag);
+                articlesDiv.append(img);
             };
         })
 });
@@ -137,8 +157,12 @@ $updateArticlesForm.addEventListener('submit', async function (e) {
             const articlesDiv = document.querySelector("#updatearticles");
             const article = data[0];
             const tag = document.createElement('p');
-            tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <hr>`;
+            const img = document.createElement("img");
+            img.src = article.url_img;
+            tag.innerHTML = `author_id: ${article.author_id} <br> description: ${article.description} <br>
+                category: ${article.name_category} <hr>`;
             articlesDiv.append(tag);
+            articlesDiv.append(img);
         })
 });
 

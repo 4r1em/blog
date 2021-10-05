@@ -16,10 +16,15 @@ const articlesSchema = new mongoose.Schema({
         required: true,
         ref: 'Categorys'
     },
-    image_id: {
-        type: mongoose.Schema.Types.ObjectId,
+    url_img: {
+        type: String,
         required: true,
-        ref: 'Images'
+        trim: true
+    },
+    name_category: {
+        type: String,
+        required: true,
+        trim: true
     },
     deletedAt: {
         type: Date,

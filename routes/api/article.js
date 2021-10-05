@@ -28,7 +28,9 @@ router.post('/article', auth, async (req, res) => {
 
     const article = await articleModel.create({
         ...req.body,
-        author_id: req.user['_id']
+        author_id: req.user['_id'],
+        url_img: imageDb[0].url,
+        name_category: categoryDb[0].name
     });
 
     res.status(201);
@@ -122,8 +124,26 @@ router.put('/article', [auth, valid], async (req, res) => {
     const userParams = { "author_id": req.user["_id"], "_id": artcleId };
     const updateArticleParams = (req.user.role === "admin") ? adminParams : userParams;
 
+
     const article = await articleModel.find({ '_id': artcleId });
     if (!article.length) return res.status(404).json("Article not found!");
+
+    if (req.body['category_id']) {
+        const categoryDb = await categoryModel.find({ "_id": req.body['category_id'] });
+        if (!categoryDb.length) return res.status(400).json("No such category");
+        const update = await articleModel.updateOne(updateArticleParams, { name_category: categoryDb[0].name })
+        if (update.nModified === 0) {
+            return res.status(400).json("You have no rights to replace someone else's data")
+        };
+    }
+    if (req.body['image_id']) {
+        const imageDb = await imageModel.find({ "_id": req.body['image_id'] });
+        if (!imageDb.length) return res.status(400).json("No such image");
+        const update = await articleModel.updateOne(updateArticleParams, { url_img: imageDb[0].url })
+        if (update.nModified === 0) {
+            return res.status(400).json("You have no rights to replace someone else's data")
+        };
+    }
 
     const update = await articleModel.updateOne(updateArticleParams, req.body);
     if (update.nModified === 0) {
