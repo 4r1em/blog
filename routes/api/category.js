@@ -10,7 +10,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 // Создание категории
 
 router.post('/category', [auth, accessAdmin], async (req, res) => {
-    if (!req.body.name) return res.status(400).json("Enter NAME");
+    if (!req.body.name) return res.status(400).send("Enter NAME");
     const category = await categoryModel.create(req.body);
 
     res.status(201);
@@ -21,7 +21,7 @@ router.post('/category', [auth, accessAdmin], async (req, res) => {
 
 router.get('/categories', auth, async (req, res) => {
     const categories = await categoryModel.find();
-    if (!categories.length) return res.status(200).json(categories);
+    if (!categories.length) return res.status(200).send(categories);
 
     res.status(200);
     res.json(categories);
@@ -31,10 +31,10 @@ router.get('/categories', auth, async (req, res) => {
 
 router.get('/category/:id', [auth, accessAdmin], async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
-        return res.status(400).json("Not correct ID");
+        return res.status(400).send("Not correct ID");
     }
     const category = await categoryModel.find({ '_id': req.params.id });
-    if (!category.length) return res.status(404).json("Such a category does not exist ");
+    if (!category.length) return res.status(404).send("Such a category does not exist ");
 
 
     res.status(200);
@@ -45,10 +45,10 @@ router.get('/category/:id', [auth, accessAdmin], async (req, res) => {
 
 router.put('/category', [auth, accessAdmin, valid], async (req, res) => {
 
-    if (!req.body.name.length) return res.status(400).json("Enter update ID and what you want to name");
+    if (!req.body.name.length) return res.status(400).send("Enter update ID and what you want to name");
 
     const category = await categoryModel.find({ '_id': req.body.id });
-    if (!category.length) return res.status(404).json("Such a category does not exist ");
+    if (!category.length) return res.status(404).send("Such a category does not exist ");
 
     await categoryModel.updateOne({ '_id': req.body.id }, { 'name': req.body.name });
     const updateCategory = await categoryModel.find({ '_id': req.body.id });
@@ -61,12 +61,12 @@ router.put('/category', [auth, accessAdmin, valid], async (req, res) => {
 
 router.delete('/category', [auth, accessAdmin, valid], async (req, res) => {
     const category = await categoryModel.find({ '_id': req.body.id });
-    if (!category.length) return res.status(404).json("Such a category does not exist ");
+    if (!category.length) return res.status(404).send("Such a category does not exist ");
 
     await categoryModel.deleteOne({ "_id": req.body.id });
 
     res.status(200);
-    res.json("Category deleted");
+    res.send("Category deleted");
 });
 
 

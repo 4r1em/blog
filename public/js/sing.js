@@ -22,7 +22,7 @@ $singUsersForm.addEventListener('submit', async function (e) {
     })
         .then(response => {
             if (!response.ok) {
-                return response.json().then((err) => {
+                return response.text().then((err) => {
                     const div = document.querySelector("#singuser");
                     const tag = document.createElement('p');
                     tag.innerHTML = `${err}`;

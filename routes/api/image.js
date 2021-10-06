@@ -8,7 +8,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 // Создание картинки
 
 router.post('/image', [auth, accessAdmin], async (req, res) => {
-    if (!req.body.url) return res.status(400).json("Enter URL");
+    if (!req.body.url) return res.status(400).send("Enter URL");
     const image = await imageModel.create(req.body);
 
     res.status(201);
@@ -19,7 +19,7 @@ router.post('/image', [auth, accessAdmin], async (req, res) => {
 
 router.get('/images', auth, async (req, res) => {
     const images = await imageModel.find();
-    if (!images.length) return res.status(200).json("images");
+    if (!images.length) return res.status(200).send("images");
 
     res.status(200);
     res.json(images);
@@ -29,10 +29,10 @@ router.get('/images', auth, async (req, res) => {
 
 router.get('/image/:id', [auth, accessAdmin], async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
-        return res.status(400).json("Not correct ID");
+        return res.status(400).send("Not correct ID");
     }
     const image = await imageModel.find({ '_id': req.params.id });
-    if (!image.length) return res.status(404).json("Such a picture does not exist ");
+    if (!image.length) return res.status(404).send("Such a picture does not exist ");
 
 
     res.status(200);
@@ -43,10 +43,10 @@ router.get('/image/:id', [auth, accessAdmin], async (req, res) => {
 
 router.put('/image', [auth, accessAdmin, valid], async (req, res) => {
 
-    if (!req.body.url.length) return res.status(400).json("Enter update ID and what you want to url");
+    if (!req.body.url.length) return res.status(400).send("Enter update ID and what you want to url");
 
     const image = await imageModel.find({ '_id': req.body.id });
-    if (!image.length) return res.status(404).json("Such a picture does not exist ");
+    if (!image.length) return res.status(404).send("Such a picture does not exist ");
 
     await imageModel.updateOne({ '_id': req.body.id }, { 'url': req.body.url });
     const updateImage = await imageModel.find({ '_id': req.body.id });
@@ -59,12 +59,12 @@ router.put('/image', [auth, accessAdmin, valid], async (req, res) => {
 
 router.delete('/image', [auth, accessAdmin, valid], async (req, res) => {
     const image = await imageModel.find({ '_id': req.body.id });
-    if (!image.length) return res.status(404).json("Such a picture does not exist ");
+    if (!image.length) return res.status(404).send("Such a picture does not exist ");
 
     await imageModel.deleteOne({ '_id': req.body.id });
 
     res.status(200);
-    res.json("Image deleted");
+    res.send("Image deleted");
 });
 
 

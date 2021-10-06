@@ -152,7 +152,7 @@ async function fetchGet(url, params = '') {
 
 function sendError(response, div) {
     if (!response.ok) {
-        return response.json().then((err) => {
+        return response.text().then((err) => {
             const imageDiv = document.querySelector(div);
             const tag = document.createElement('p');
             tag.innerHTML = `${err}`;
