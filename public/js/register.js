@@ -26,7 +26,7 @@ $createUsersForm.addEventListener('submit', async function (e) {
                 return response.text().then((err) => {
                     const div = document.querySelector("#createuser");
                     const tag = document.createElement('p');
-                    tag.innerHTML = `${err}`;
+                    tag.innerHTML = err;
                     div.append(tag);
                     throw err
                 })

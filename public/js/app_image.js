@@ -155,7 +155,7 @@ function sendError(response, div) {
         return response.text().then((err) => {
             const imageDiv = document.querySelector(div);
             const tag = document.createElement('p');
-            tag.innerHTML = `${err}`;
+            tag.innerHTML = err;
             imageDiv.append(tag);
             throw err
         })

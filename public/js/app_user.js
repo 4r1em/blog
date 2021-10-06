@@ -145,7 +145,7 @@ function sendError(response, div) {
         return response.text().then((err) => {
             const articlesDiv = document.querySelector(div);
             const tag = document.createElement('p');
-            tag.innerHTML = `${err}`;
+            tag.innerHTML = err;
             articlesDiv.append(tag);
             throw err
         })
