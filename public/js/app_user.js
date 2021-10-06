@@ -106,7 +106,7 @@ $submitUserForm.addEventListener('submit', async function (e) {
     };
     fetchParams(urlV + '/user/submit', 'PUT', form)
         .then(response => {
-            return sendError(response, "#followeruser")
+            return sendErrorDell(response, "#followeruser")
         })
         .then((data) => {
             for (item of data[0].follower) {
@@ -152,3 +152,16 @@ function sendError(response, div) {
     }
     return response.json()
 }
+
+function sendErrorDell(response, div) {
+    if (!response.ok) {
+        return response.text().then((err) => {
+            const imageDiv = document.querySelector(div);
+            const tag = document.createElement('p');
+            tag.innerHTML = err;
+            imageDiv.append(tag);
+            throw err
+        })
+    }
+    return response.text()
+};

@@ -106,7 +106,7 @@ $categoryDelForm.addEventListener('submit', async function (e) {
 
     fetchParams(urlV + '/category/', 'DELETE', form)
         .then(response => {
-            return sendError(response, "#delcategory")
+            return sendErrorDell(response, "#delcategory")
         })
         .then((data) => {
             const categoryDiv = document.querySelector("#delcategory");
@@ -150,4 +150,17 @@ function sendError(response, div) {
         })
     }
     return response.json()
+};
+
+function sendErrorDell(response, div) {
+    if (!response.ok) {
+        return response.text().then((err) => {
+            const imageDiv = document.querySelector(div);
+            const tag = document.createElement('p');
+            tag.innerHTML = err;
+            imageDiv.append(tag);
+            throw err
+        })
+    }
+    return response.text()
 };

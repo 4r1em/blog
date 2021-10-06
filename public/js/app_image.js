@@ -117,7 +117,7 @@ $imageDelForm.addEventListener('submit', async function (e) {
 
     fetchParams(urlV + '/image/', 'DELETE', form)
         .then(response => {
-            return sendError(response, "#delimage")
+            return sendErrorDell(response, "#delimage")
         })
         .then((data) => {
             const imageDiv = document.querySelector("#delimage");
@@ -161,4 +161,17 @@ function sendError(response, div) {
         })
     }
     return response.json()
+};
+
+function sendErrorDell(response, div) {
+    if (!response.ok) {
+        return response.text().then((err) => {
+            const imageDiv = document.querySelector(div);
+            const tag = document.createElement('p');
+            tag.innerHTML = err;
+            imageDiv.append(tag);
+            throw err
+        })
+    }
+    return response.text()
 };
