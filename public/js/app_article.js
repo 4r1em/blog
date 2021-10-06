@@ -178,7 +178,7 @@ $deleteArticlesForm.addEventListener('submit', async function (e) {
 
     fetchParams(urlV + '/article', 'DELETE', form)
         .then(response => {
-            return sendErrorDell(response, "#deletearticles")
+            return sendError(response, "#deletearticles", "text")
         })
         .then((data) => {
             const articlesDiv = document.querySelector("#deletearticles");
@@ -211,7 +211,7 @@ async function fetchGet(url, params = '') {
     return response
 }
 
-function sendError(response, div) {
+function sendError(response, div, type = 'json') {
     if (!response.ok) {
         return response.text().then((err) => {
             const articlesDiv = document.querySelector(div);
@@ -221,18 +221,6 @@ function sendError(response, div) {
             throw err
         })
     }
-    return response.json()
-}
-
-function sendErrorDell(response, div) {
-    if (!response.ok) {
-        return response.text().then((err) => {
-            const imageDiv = document.querySelector(div);
-            const tag = document.createElement('p');
-            tag.innerHTML = err;
-            imageDiv.append(tag);
-            throw err
-        })
-    }
+    if (type === 'json') return response.json()
     return response.text()
-};
+}

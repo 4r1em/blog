@@ -168,7 +168,7 @@ router.delete('/article', [auth, valid], async (req, res) => {
 
     const deletedte = await articleModel.deleteOne(updateArticleParams)
     if (deletedte.deletedCount === 0) {
-        return res.status(400).send("You do not have permission to delete other people's articles");
+        return res.status(403).send("You do not have permission to delete other people's articles");
     }
     res.status(200);
     res.send('Article deleted');

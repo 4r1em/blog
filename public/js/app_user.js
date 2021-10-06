@@ -84,7 +84,7 @@ $deleteUserForm.addEventListener('submit', async function (e) {
 
     fetchParams(urlV + '/user', 'DELETE', form)
         .then(response => {
-            return sendError(response, "#deleteuser")
+            return sendError(response, "#deleteuser", "text")
         })
         .then((data) => {
             const userDiv = document.querySelector("#deleteuser");
@@ -106,7 +106,7 @@ $submitUserForm.addEventListener('submit', async function (e) {
     };
     fetchParams(urlV + '/user/submit', 'PUT', form)
         .then(response => {
-            return sendErrorDell(response, "#followeruser")
+            return sendError(response, "#followeruser")
         })
         .then((data) => {
             for (item of data[0].follower) {
@@ -140,7 +140,7 @@ async function fetchGet(url, params = '') {
     return response
 }
 
-function sendError(response, div) {
+function sendError(response, div, type = 'json') {
     if (!response.ok) {
         return response.text().then((err) => {
             const articlesDiv = document.querySelector(div);
@@ -150,18 +150,6 @@ function sendError(response, div) {
             throw err
         })
     }
-    return response.json()
-}
-
-function sendErrorDell(response, div) {
-    if (!response.ok) {
-        return response.text().then((err) => {
-            const imageDiv = document.querySelector(div);
-            const tag = document.createElement('p');
-            tag.innerHTML = err;
-            imageDiv.append(tag);
-            throw err
-        })
-    }
+    if (type === 'json') return response.json()
     return response.text()
-};
+}
